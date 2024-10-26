@@ -1,9 +1,8 @@
-from django.db import models
-from django.db.models import ImageField, ForeignKey, CharField, PositiveIntegerField, SET_NULL
+from django.db.models import ImageField, ForeignKey, CharField, PositiveIntegerField, SET_NULL, Model
 from taggit.managers import TaggableManager
 
 
-class Artwork(models.Model):
+class Artwork(Model):
     CATEGORY_CHOICES = [
         ('painting', 'Obraz'),
         ('sketch', 'Skica'),
@@ -47,7 +46,7 @@ class Artwork(models.Model):
         ordering = ['-year', 'title']
 
 
-class ArtworkImage(models.Model):
+class ArtworkImage(Model):
     artwork = ForeignKey(Artwork, on_delete=SET_NULL, related_name='images', null=True, blank=True)
     image = ImageField(upload_to='artworks/', verbose_name="Fotky", null=True, blank=True)
 
@@ -59,7 +58,7 @@ class ArtworkImage(models.Model):
         verbose_name_plural = "Fotky"
 
 
-class Book(models.Model):
+class Book(Model):
     CATEGORY_CHOICES = [
         ('catalog', 'Katalog'),
         ('book', 'Kniha'),
@@ -95,7 +94,7 @@ class Book(models.Model):
         ordering = ['-year', 'title']
 
 
-class BookImage(models.Model):
+class BookImage(Model):
     book = ForeignKey(Book, on_delete=SET_NULL, related_name='images', null=True, blank=True)
     image = ImageField(upload_to='books/', verbose_name="Fotky", null=True, blank=True)
 
